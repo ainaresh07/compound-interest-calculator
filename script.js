@@ -1,63 +1,83 @@
-// script.js
-document.getElementById("calculate-btn").addEventListener("click", () => {
-  const principal = parseFloat(document.getElementById("principal").value);
-  const rate = parseFloat(document.getElementById("rate").value) / 100;
-  const days = parseInt(document.getElementById("days").value);
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(120deg, #f6d365, #fda085);
+  color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
 
-  if (isNaN(principal) || isNaN(rate) || isNaN(days) || principal <= 0 || rate <= 0 || days <= 0) {
-    alert("Please enter valid positive values for all inputs.");
-    return;
-  }
+.container {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: 350px;
+  text-align: center;
+}
 
-  const tableBody = document.querySelector("#result-table tbody");
-  tableBody.innerHTML = ""; // Clear previous results
+h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
 
-  document.getElementById("result-section").classList.remove("hidden");
+.form-group {
+  margin-bottom: 15px;
+  text-align: left;
+}
 
-  let amount = principal;
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 14px;
+}
 
-  // Render rows
-  for (let day = 1; day <= days; day++) {
-    amount *= (1 + rate);
-    const row = `<tr>
-                  <td>${day}</td>
-                  <td>${amount.toFixed(2)}</td>
-                </tr>`;
-    tableBody.innerHTML += row;
-  }
-});
+input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+}
 
-// Clear Button Functionality
-document.getElementById("clear-btn").addEventListener("click", () => {
-  document.getElementById("principal").value = "";
-  document.getElementById("rate").value = "";
-  document.getElementById("days").value = "";
-  document.querySelector("#result-table tbody").innerHTML = "";
-  document.getElementById("result-section").classList.add("hidden");
-});
+button {
+  padding: 10px 15px;
+  font-size: 14px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 5px;
+}
 
-// Back Button Functionality
-document.getElementById("back-btn").addEventListener("click", () => {
-  document.getElementById("principal").value = "";
-  document.getElementById("rate").value = "";
-  document.getElementById("days").value = "";
-  document.querySelector("#result-table tbody").innerHTML = "";
-  document.getElementById("result-section").classList.add("hidden");
-});
+button#calculateBtn {
+  background: #4caf50;
+  color: #fff;
+}
 
-// PDF Download Functionality
-document.getElementById("download-pdf").addEventListener("click", () => {
-  const { jsPDF } = window.jspdf; // Ensure you include jsPDF library
-  const pdf = new jsPDF();
-  pdf.text("Compound Interest Table", 10, 10);
+button#clearBtn {
+  background: #f44336;
+  color: #fff;
+}
 
-  const table = document.getElementById("result-table");
-  pdf.autoTable({
-    head: [[...table.querySelectorAll("th")].map((th) => th.textContent)],
-    body: [...table.querySelectorAll("tbody tr")].map((tr) =>
-      [...tr.querySelectorAll("td")].map((td) => td.textContent)
-    ),
-  });
+.results {
+  margin-top: 20px;
+}
 
-  pdf.save("Compound_Interest_Table.pdf");
-});
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+th, td {
+  padding: 10px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+th {
+  background-color: #f4f4f4;
+    }
