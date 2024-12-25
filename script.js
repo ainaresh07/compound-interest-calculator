@@ -1,83 +1,31 @@
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background: linear-gradient(120deg, #f6d365, #fda085);
-  color: #333;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
+document.getElementById('calculateBtn').addEventListener('click', function () {
+  const loanAmount = parseFloat(document.getElementById('loanAmount').value);
+  const interestRate = parseFloat(document.getElementById('interestRate').value);
+  const loanTenure = parseFloat(document.getElementById('loanTenure').value);
 
-.container {
-  background: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  width: 350px;
-  text-align: center;
-}
+  if (isNaN(loanAmount) || isNaN(interestRate) || isNaN(loanTenure)) {
+    alert('Please enter valid numbers in all fields');
+    return;
+  }
 
-h1 {
-  font-size: 24px;
-  margin-bottom: 20px;
-}
+  const monthlyInterestRate = interestRate / 12 / 100;
+  const numberOfMonths = loanTenure * 12;
+  const emi = 
+    (loanAmount * monthlyInterestRate * Math.pow(1 + monthlyInterestRate, numberOfMonths)) / 
+    (Math.pow(1 + monthlyInterestRate, numberOfMonths) - 1);
+  const totalPayment = emi * numberOfMonths;
+  const totalInterest = totalPayment - loanAmount;
 
-.form-group {
-  margin-bottom: 15px;
-  text-align: left;
-}
+  document.getElementById('emiResult').innerText = emi.toFixed(2);
+  document.getElementById('interestResult').innerText = totalInterest.toFixed(2);
+  document.getElementById('totalResult').innerText = totalPayment.toFixed(2);
+});
 
-label {
-  display: block;
-  margin-bottom: 5px;
-  font-size: 14px;
-}
-
-input {
-  width: 100%;
-  padding: 8px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 14px;
-}
-
-button {
-  padding: 10px 15px;
-  font-size: 14px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  margin: 5px;
-}
-
-button#calculateBtn {
-  background: #4caf50;
-  color: #fff;
-}
-
-button#clearBtn {
-  background: #f44336;
-  color: #fff;
-}
-
-.results {
-  margin-top: 20px;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 10px;
-}
-
-th, td {
-  padding: 10px;
-  text-align: left;
-  border: 1px solid #ddd;
-}
-
-th {
-  background-color: #f4f4f4;
-    }
+document.getElementById('clearBtn').addEventListener('click', function () {
+  document.getElementById('loanAmount').value = '';
+  document.getElementById('interestRate').value = '';
+  document.getElementById('loanTenure').value = '';
+  document.getElementById('emiResult').innerText = '';
+  document.getElementById('interestResult').innerText = '';
+  document.getElementById('totalResult').innerText = '';
+});
