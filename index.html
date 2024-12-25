@@ -1,52 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.21/jspdf.plugin.autotable.min.js"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Compound Interest Calculator</title>
+  <title>EMI Calculator</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <div class="container">
-    <h1 class="title">Compound Interest Calculator</h1>
-    <div class="scrollable-container">
-      <form id="calculator-form">
-        <div class="input-group">
-          <label for="principal">Principal Amount (₹):</label>
-          <input type="number" id="principal" required>
-        </div>
-        <div class="input-group">
-          <label for="rate">Daily Interest Rate (%):</label>
-          <input type="number" id="rate" required>
-        </div>
-        <div class="input-group">
-          <label for="days">Number of Days:</label>
-          <input type="number" id="days" required>
-        </div>
-        <div class="button-group">
-          <button type="button" id="calculate-btn">Calculate</button>
-          <button type="button" id="clear-btn">Clear</button>
-        </div>
-      </form>
+    <h1>EMI Calculator</h1>
+    <div class="form-group">
+      <label for="loanAmount">Loan Amount:</label>
+      <input type="number" id="loanAmount" placeholder="Enter loan amount">
     </div>
-    <div id="result-section" class="hidden">
-      <div class="table-container scrollable-container">
-        <table id="result-table">
-          <thead>
-            <tr>
-              <th>Day</th>
-              <th>Amount (₹)</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-      </div>
-      <div class="button-group">
-        <button id="download-pdf">Download PDF</button>
-        <button type="button" id="back-btn">Back</button>
-      </div>
+    <div class="form-group">
+      <label for="interestRate">Interest Rate (%):</label>
+      <input type="number" id="interestRate" placeholder="Enter annual interest rate">
+    </div>
+    <div class="form-group">
+      <label for="loanTenure">Loan Tenure (Years):</label>
+      <input type="number" id="loanTenure" placeholder="Enter loan tenure in years">
+    </div>
+    <div class="form-actions">
+      <button id="calculateBtn">Calculate EMI</button>
+      <button id="clearBtn">Clear</button>
+    </div>
+    <div class="results">
+      <table id="resultTable">
+        <thead>
+          <tr>
+            <th>Details</th>
+            <th>Amount (₹)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>EMI</td>
+            <td id="emiResult"></td>
+          </tr>
+          <tr>
+            <td>Total Interest</td>
+            <td id="interestResult"></td>
+          </tr>
+          <tr>
+            <td>Total Amount</td>
+            <td id="totalResult"></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
   <script src="script.js"></script>
